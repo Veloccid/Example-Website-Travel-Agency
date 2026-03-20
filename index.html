@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- ============================= -->
+<!-- DICHIARAZIONE DOCUMENTO HTML -->
+<!-- lang="it" indica la lingua principale della pagina -->
+<!-- ============================= -->
+
+<head>
+    <!-- ============================= -->
+    <!-- META TAG DI BASE -->
+    <!-- ============================= -->
+    
+    <!-- Charset UTF-8 per gestire correttamente lettere accentate -->
+    <meta charset="UTF-8">
+    
+    <!-- Viewport per rendere il sito responsive su dispositivi mobili -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Titolo della pagina visibile nella scheda del browser -->
+    <title>A.Bottoni Travel Consultant</title>
+
+    <!-- ============================= -->
+    <!-- FONT ESTERNI -->
+    <!-- ============================= -->
+    
+    <!-- Google Fonts: Montserrat per testi, Playfair Display per titoli -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- ============================= -->
+    <!-- STILI CSS INTERNI -->
+    <!-- ============================= -->
+    <style>
+        /* ========================= */
+        /* VARIABILI GLOBALI */
+        /* ========================= */
+        /* Definiamo colori e font riutilizzabili in tutto il sito */
+        :root {
+            --avorio: #FBFBF9;          /* Colore di sfondo principale */
+            --blu-notte: #0A1128;       /* Colore scuro per testo e header */
+            --oro: #D4AF37;             /* Colore accento lusso */
+            --grigio: #4A4A4A;          /* Colore testo secondario */
+
+            --font-titoli: 'Playfair Display', serif;   /* Font per titoli */
+            --font-testi: 'Montserrat', sans-serif;    /* Font per testi */
+        }
+
+        /* ========================= */
+        /* RESET BASE */
+        /* ========================= */
+        /* Rimuove margini e padding standard e imposta box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========================= */
+        /* STILE GENERALE DEL BODY */
+        /* ========================= */
+        body {
+            font-family: var(--font-testi);  /* Font principale */
+            background: var(--avorio);       /* Sfondo principale */
+            color: var(--grigio);            /* Colore testo */
+            scroll-behavior: smooth;         /* Scroll fluido per link interni */
+        }
+
+        /* ========================= */
+        /* HEADER */
+        /* ========================= */
+        header {
+            position: fixed;                 /* Header fisso in alto */
+            width: 100%;                     
+            padding: 20px 5%;                /* Spaziatura interna */
+            display: flex;                   /* Layout a riga */
+            justify-content: space-between;  /* Logo a sinistra, menu a destra */
+            align-items: center;             /* Allinea verticalmente */
+            z-index: 20;                     /* Sta sopra tutti gli elementi */
+            background: rgba(10,17,40,0.7); /* Sfondo semi-trasparente */
+        }
+
+        /* Logo */
+        .logo {
+            font-family: var(--font-titoli); /* Font elegante */
+            letter-spacing: 3px;             /* Spaziatura lettere */
+            color: var(--avorio);            /* Colore testo */
+        }
+
+        /* Menu desktop */
+        .nav-links {
+            display: flex;                   /* Mostra link in riga */
+            gap: 30px;                       /* Spazio tra i link */
+        }
+
+        /* Stile link menu */
+        .nav-links a {
+            color: var(--avorio);
+            text-decoration: none;           /* Nessuna sottolineatura */
+            transition: 0.3s;                /* Transizione per hover */
+        }
+
+        .nav-links a:hover { color: var(--oro); }
+
+        /* Bottone stile outline */
+        .btn-outline {
+            border: 1px solid var(--avorio);
+            padding: 10px 20px;
+        }
+
+        /* ========================= */
+        /* HAMBURGER MOBILE */
+        /* ========================= */
+        /* Icona a tre linee visibile solo su mobile */
+        .hamburger {
+            display: none;                  /* Nascondi su desktop */
+            flex-direction: column;         /* Linee impilate verticalmente */
+            gap: 6px;                       /* Spazio tra le linee */
+            cursor: pointer;                /* Cambio cursore hover */
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        /* Animazione hamburger → X */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px,5px);
+        }
+
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px,-5px);
+        }
+
+        /* ========================= */
+        /* MENU MOBILE FULLSCREEN */
+        /* ========================= */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);           /* Sfondo sfocato */
+            background: rgba(10,17,40,0.95);      /* Sfondo semi-trasparente */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            transform: translateY(-100%);          /* Nasconde menu */
+            transition: 0.5s;
+        }
+
+        /* Quando il menu è attivo */
+        .mobile-menu.active { transform: translateY(0); }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 26px;
+            font-family: var(--font-titoli);
+            text-decoration: none;
+        }
+
+        /* ========================= */
+        /* HERO SECTION */
+        /* ========================= */
+        .hero {
+            height: 100vh;  /* Occupa tutta l'altezza viewport */
+            background: linear-gradient(rgba(10,17,40,0.4), rgba(10,17,40,0.6)),
+                        url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            animation: fadeIn 1.5s ease-out;  /* Animazione ingresso */
+        }
+
+        .hero h1 { font-size: 50px; margin-bottom: 20px; }
+
+        .hero p { font-size: 18px; max-width: 600px; margin-bottom: 30px; line-height:1.6; }
+
+        .btn-primary {
+            background: var(--oro);
+            color: var(--blu-notte);
+            padding: 15px 35px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-primary:hover { background:#b5952f; }
+
+        /* ========================= */
+        /* SEZIONI */
+        /* ========================= */
+        .section { padding: 100px 5%; text-align:center; animation: fadeIn 1.5s ease-out; }
+
+        .cards { display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
+
+        .card { background:white; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; }
+
+        .card:hover { transform: translateY(-10px); }
+
+        .card-img { height:200px; background-size:cover; }
+
+        /* ========================= */
+        /* FORM CONTATTI */
+        /* ========================= */
+        form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:15px; }
+
+        input, textarea { padding:15px; border:1px solid #ccc; }
+
+        form button { align-self:center; }
+
+        /* ========================= */
+        /* WHATSAPP BUTTON */
+        /* ========================= */
+        .whatsapp {
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            background:#25D366;
+            color:white;
+            padding:15px 20px;
+            border-radius:50px;
+            font-size:14px;
+            text-decoration:none;
+        }
+
+        /* ========================= */
+        /* ANIMAZIONI */
+        /* ========================= */
+        @keyframes fadeIn {
+            0%{opacity:0; transform:translateY(20px);}
+            100%{opacity:1; transform:translateY(0);}
+        }
+
+        /* ========================= */
+        /* RESPONSIVE */
+        /* ========================= */
+        @media(max-width:768px){
+            .nav-links { display:none; }      /* Nasconde menu desktop su mobile */
+            .hamburger { display:flex; }     /* Mostra hamburger su mobile */
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+<header>
+    <div class="logo">A.Bottoni Travel</div>
+
+    <!-- Menu desktop -->
+    <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#about">Chi Siamo</a>
+        <a href="#contatti" class="btn-outline">Contatti</a>
+    </nav>
+
+    <!-- Hamburger per mobile -->
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</header>
+
+<!-- ========================= -->
+<!-- MENU MOBILE -->
+<!-- ========================= -->
+<div class="mobile-menu" id="menu">
+    <a href="#hero" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">Chi Siamo</a>
+    <a href="#contatti" onclick="closeMenu()">Contatti</a>
+</div>
+
+<!-- ========================= -->
+<!-- HERO SECTION -->
+<!-- ========================= -->
+<section class="hero" id="hero">
+    <h1>L'Arte del Viaggio su Misura</h1>
+    <p>
+        Ogni itinerario è unico: da città iconiche a luoghi segreti,
+        vivrai esperienze progettate intorno a te.
+    </p>
+    <button class="btn-primary" onclick="scrollToSection('about')">Scopri di più</button>
+</section>
+
+<!-- ========================= -->
+<!-- CHI SIAMO -->
+<!-- ========================= -->
+<section class="section" id="about">
+    <h2>Chi Siamo</h2>
+    <p>A.Bottoni Travel crea viaggi esclusivi, cuciti sui desideri dei clienti.</p>
+    <p>Ogni dettaglio è studiato per garantire lusso, privacy e autenticità.</p>
+</section>
+
+<!-- ========================= -->
+<!-- CONTATTI -->
+<!-- ========================= -->
+<section class="section" id="contatti">
+    <h2>Contattaci</h2>
+    <!-- Form invio email -->
+    <form action="mailto:tuo@email.com" method="post" enctype="text/plain">
+        <input type="text" placeholder="Nome" name="Nome">
+        <input type="email" placeholder="Email" name="Email">
+        <textarea placeholder="Il tuo viaggio ideale" name="Messaggio"></textarea>
+        <button class="btn-primary">Invia richiesta</button>
+    </form>
+</section>
+
+<!-- ========================= -->
+<!-- WHATSAPP BUTTON -->
+<!-- ========================= -->
+<a href="https://wa.me/393000000000" target="_blank" class="whatsapp">WhatsApp</a>
+
+<!-- ========================= -->
+<!-- SCRIPT JS -->
+<!-- ========================= -->
+<script>
+/* Apri/chiudi menu mobile */
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active");
+    document.getElementById("hamburger").classList.toggle("active");
+}
+
+/* Chiudi menu cliccando link */
+function closeMenu(){
+    document.getElementById("menu").classList.remove("active");
+    document.getElementById("hamburger").classList.remove("active");
+}
+
+/* Scroll animato verso sezione */
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    closeMenu();
+}
+</script>
+
+</body>
+</html>
