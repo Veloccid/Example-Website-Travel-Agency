@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- ============================= -->
+<!-- SITO WEB PREMIUM A.BOTTONI TRAVEL -->
+<!-- Include hero, chi siamo, esperienze luxury, contatti, menu mobile e WhatsApp -->
+<!-- Tutto commentato per facilitare modifiche -->
+<!-- ============================= -->
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.Bottoni Travel Consultant</title>
+
+<!-- FONT GOOGLE -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* VARIABILI GLOBALI */
+/* ========================= */
+:root {
+    --avorio: #FBFBF9;
+    --blu-notte: #0A1128;
+    --oro: #D4AF37;
+    --grigio: #4A4A4A;
+
+    --font-titoli: 'Playfair Display', serif;
+    --font-testi: 'Montserrat', sans-serif;
+}
+
+/* RESET BASE */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* BODY */
+body {
+    font-family: var(--font-testi);
+    background: var(--avorio);
+    color: var(--grigio);
+    scroll-behavior: smooth;
+}
+
+/* ========================= */
+/* HEADER */
+header {
+    position: fixed;
+    width: 100%;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    background: rgba(10,17,40,0.7);
+}
+
+/* Logo */
+.logo {
+    font-family: var(--font-titoli);
+    letter-spacing: 3px;
+    color: var(--avorio);
+}
+
+/* MENU DESKTOP */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+.nav-links a {
+    color: var(--avorio);
+    text-decoration: none;
+    transition: 0.3s;
+}
+.nav-links a:hover { color: var(--oro); }
+
+.btn-outline {
+    border: 1px solid var(--avorio);
+    padding: 10px 20px;
+}
+
+/* ========================= */
+/* HAMBURGER MOBILE */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+.hamburger span {
+    width: 25px;
+    height: 2px;
+    background: white;
+    transition: 0.3s;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+/* ========================= */
+/* MENU MOBILE FULLSCREEN */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background: rgba(10,17,40,0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    transform: translateY(-100%);
+    transition: 0.5s;
+}
+.mobile-menu.active { transform: translateY(0); }
+.mobile-menu a {
+    color: white;
+    font-size: 26px;
+    font-family: var(--font-titoli);
+    text-decoration: none;
+}
+
+/* ========================= */
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(10,17,40,0.4), rgba(10,17,40,0.6)),
+                url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    animation: fadeIn 1.5s ease-out;
+}
+.hero h1 { font-size: 50px; margin-bottom: 20px; }
+.hero p { font-size: 18px; max-width: 600px; margin-bottom: 30px; line-height:1.6; }
+.btn-primary {
+    background: var(--oro);
+    color: var(--blu-notte);
+    padding: 15px 35px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-primary:hover { background:#b5952f; }
+
+/* ========================= */
+/* SEZIONI GENERALI */
+.section { padding: 100px 5%; text-align:center; animation: fadeIn 1.5s ease-out; }
+
+/* ========================= */
+/* CARD ESPERIENZE LUXURY */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+.card {
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-10px); }
+.card-img { height:200px; background-size:cover; background-position:center; }
+
+/* ========================= */
+/* FORM CONTATTI */
+form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:15px; }
+input, textarea { padding:15px; border:1px solid #ccc; }
+form button { align-self:center; }
+
+/* ========================= */
+/* WHATSAPP BUTTON */
+.whatsapp {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px 20px;
+    border-radius:50px;
+    font-size:14px;
+    text-decoration:none;
+}
+
+/* ========================= */
+/* ANIMAZIONI */
+@keyframes fadeIn { 0%{opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .nav-links { display:none; }
+    .hamburger { display:flex; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HEADER -->
+<header>
+    <div class="logo">A.Bottoni Travel</div>
+    <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#about">Chi Siamo</a>
+        <a href="#esperienze">Esperienze</a>
+        <a href="#contatti" class="btn-outline">Contatti</a>
+    </nav>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</header>
+
+<!-- ========================= -->
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="menu">
+    <a href="#hero" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">Chi Siamo</a>
+    <a href="#esperienze" onclick="closeMenu()">Esperienze</a>
+    <a href="#contatti" onclick="closeMenu()">Contatti</a>
+</div>
+
+<!-- ========================= -->
+<!-- HERO SECTION -->
+<section class="hero" id="hero">
+    <h1>L'Arte del Viaggio su Misura</h1>
+    <p>Ogni itinerario è unico: da città iconiche a luoghi segreti, vivrai esperienze progettate intorno a te.</p>
+    <button class="btn-primary" onclick="scrollToSection('about')">Scopri di più</button>
+</section>
+
+<!-- ========================= -->
+<!-- CHI SIAMO -->
+<section class="section" id="about">
+    <h2>Chi Siamo</h2>
+    <p>A.Bottoni Travel crea viaggi esclusivi, cuciti sui desideri dei clienti.</p>
+    <p>Ogni dettaglio è studiato per garantire lusso, privacy e autenticità.</p>
+</section>
+
+<!-- ========================= -->
+<!-- ESPERIENZE LUXURY -->
+<section class="section" id="esperienze">
+    <h2>Esperienze Luxury</h2>
+    <p>Scopri le nostre esperienze selezionate per i viaggiatori più esigenti: privacy, lusso e unicità.</p>
+    <div class="cards">
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514282401047-d79a71a590e8');"></div>
+            <div style="padding:20px;">
+                <h3>Fuga in Paradiso</h3>
+                <p>Atolli privati alle Maldive e ville segrete in Polinesia. Privacy totale e comfort esclusivo.</p>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801');"></div>
+            <div style="padding:20px;">
+                <h3>Safari Privato</h3>
+                <p>Esplora il Botswana con lodge a 5 stelle, guide esperte e itinerari personalizzati lontano dal turismo di massa.</p>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a');"></div>
+            <div style="padding:20px;">
+                <h3>Cultura e Privilegio</h3>
+                <p>Accessi esclusivi a musei, cene private stellate e dimore storiche riservate ai nostri clienti.</p>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');"></div>
+            <div style="padding:20px;">
+                <h3>Crociere Esclusive</h3>
+                <p>Yacht privati nel Mediterraneo e itinerari personalizzati per un’esperienza unica sul mare cristallino.</p>
+            </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1499696010847-7b6c178037b0');"></div>
+            <div style="padding:20px;">
+                <h3>Montagna e Wellness</h3>
+                <p>Rifugi di lusso tra le Alpi, spa private e percorsi esclusivi immersi nella natura incontaminata.</p>
+            </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff');"></div>
+            <div style="padding:20px;">
+                <h3>Esperienze Gastronomiche</h3>
+                <p>Cene private con chef stellati, degustazioni esclusive e itinerari gourmet nelle città più iconiche del mondo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- CONTATTI -->
+<section class="section" id="contatti">
+    <h2>Contattaci</h2>
+    <form action="mailto:tuo@email.com" method="post" enctype="text/plain">
+        <input type="text" placeholder="Nome" name="Nome">
+        <input type="email" placeholder="Email" name="Email">
+        <textarea placeholder="Il tuo viaggio ideale" name="Messaggio"></textarea>
+        <button class="btn-primary">Invia richiesta</button>
+    </form>
+</section>
+
+<!-- ========================= -->
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/393000000000" target="_blank" class="whatsapp">WhatsApp</a>
+
+<!-- ========================= -->
+<!-- SCRIPT JS -->
+<script>
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active");
+    document.getElementById("hamburger").classList.toggle("active");
+}
+function closeMenu(){
+    document.getElementById("menu").classList.remove("active");
+    document.getElementById("hamburger").classList.remove("active");
+}
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    closeMenu();
+}
+</script>
+
+</body>
+</html>
